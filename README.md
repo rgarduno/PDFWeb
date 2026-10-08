@@ -1,99 +1,99 @@
-# PDFWeb — Web Studio de Edición Quirúrgica de PDFs
+# PDFWeb — Interactive Surgical PDF Web Studio
 
-PDFWeb es la aplicación web interactiva de **PDF Engine**, construida sobre **Next.js 16 (App Router)**, **React 19**, **TypeScript** y **Tailwind CSS**. Proporciona una interfaz visual tipo estudio para la inspección, navegación y edición in-situ de documentos PDF con fidelidad tipográfica milimétrica.
+PDFWeb is the official client-side web application for **PDF Engine**, built on **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**. It delivers an enterprise-grade studio interface for document inspection, multi-page manipulation, and in-situ surgical text editing with millimeter-accurate typographic fidelity.
 
 ---
 
-## Ecosistema PDFEngine
+## PDFEngine Ecosystem
 
-PDFWeb es el cliente visual oficial dentro de la arquitectura de repositorios desacoplados de **PDFEngine**:
+PDFWeb is the user-facing web layer within the decoupled **PDFEngine** multi-repository architecture:
 
-| Repositorio | Rol | Stack Tecnológico | Estado |
+| Repository | Role | Tech Stack | Status |
 | :--- | :--- | :--- | :--- |
-| [**PDFEngine**](https://github.com/rgarduno/PDFEngine) | Núcleo algorítmico de alto rendimiento y extensión nativa Python | Rust (ISO 32000-1) + PyO3 | Producción |
-| [**PDFAPI**](https://github.com/rgarduno/PDFAPI) | Backend comercial REST, WebSockets y control multi-tenant | Python 3.13 + FastAPI + Pydantic v2 | Producción |
-| [**PDFWeb**](https://github.com/rgarduno/PDFWeb) *(Este Repo)* | Estudio web interactivo con arquitectura Dual-Canvas | Next.js 16 + React 19 + Tailwind CSS | Producción |
+| [**PDFEngine**](https://github.com/rgarduno/PDFEngine) | High-performance core engine & Python extension module | Rust (ISO 32000-1) + PyO3 | Production-ready |
+| [**PDFAPI**](https://github.com/rgarduno/PDFAPI) | Commercial multi-tenant REST & WebSocket service | Python 3.13 + FastAPI + Pydantic v2 | Production-ready |
+| [**PDFWeb**](https://github.com/rgarduno/PDFWeb) *(This Repo)* | Interactive Dual-Canvas Web Studio | Next.js 16 (App Router) + React 19 + Tailwind CSS | Production-ready |
 
 ---
 
-## Características Principales
+## Key Features
 
-- **Arquitectura Dual-Canvas Pixel-Perfect**:
-  - **Capa 0 (Canvas Base PDF.js)**: Proyecta el renderizado vectorial de alta fidelidad original del documento (vectores, curvas Bézier, degradados `/Shading`, sombras e imágenes de fondo).
-  - **Capa 1 (DOM Interactivo)**: Bloques de texto proyectados exactamente en coordenadas de página para selección, inspección y edición tipográfica con auto-reflow en tiempo real vía WebSockets.
-  - **Capa 2 (Resaltado Quirúrgico & Diff Engine)**: Proyección de cuadros delimitadores coloreados para diferencias semánticas, campos de formulario, tablas y anotaciones vectoriales.
-- **Herramientas de Edición & Barra Superior (`Toolbar`)**:
-  - Selector de modo de cursor (Selección, Edición in-situ, Anotaciones, Dibujo vectorial).
-  - Herramientas de dibujo: trazo libre (`/Ink`), rectángulos (`/Square`), círculos (`/Circle`), líneas con flecha (`/Line`) y polígonos (`/Polygon`).
-  - Controles de zoom con ajuste al ancho y ajuste a página completa.
-- **Barra Lateral Multifuncional (`Sidebar`)**:
-  - **Páginas / Miniaturas**: Reordenamiento, rotación individual y eliminación de páginas.
-  - **Formularios AcroForm**: Constructor y editor de campos interactivos (texto, casillas, radio buttons, menús desplegables).
-  - **Tablas**: Detección estructural de tablas (Lattice & Stream) con exportación directa a JSON, CSV, Markdown y HTML.
-  - **Censura & Sanitización**: Censura por coincidencia de texto, patrones regex (RFC, CURP, SSN, tarjetas de crédito) o regiones seleccionadas, con purga de metadatos.
-  - **Firmas Digitales & Seguridad**: Inspección de certificados, firma digital PKCS#7/CMS y sellado de tiempo TSA RFC 3161.
-  - **OCR & PDF/A**: Inyección de capa OCR invisible y validación/conversión archivística PDF/A-1b y PDF/A-2b.
-  - **Metadatos (/Info & XMP)**: Editor sincronizado bidireccional de metadatos documentales.
-  - **Diff Engine**: Comparador visual de documentos con reporte de discrepancias cuantitativo y saltos interactivos por página.
-  - **Auditoría**: Visor en tiempo real del registro inmutable de acciones.
+- **Pixel-Perfect Dual-Canvas Architecture**:
+  - **Layer 0 (PDF.js Canvas Backdrop)**: High-density raster projection rendering original vector graphics, Bézier curves, shading patterns (`/Shading`), background fills, and complex images.
+  - **Layer 1 (Interactive DOM Overlay)**: Paragraph blocks mapped to exact device points for selection, cursor tracking, and in-place editing with real-time typographic reflow via WebSockets.
+  - **Layer 2 (Surgical Highlights & Diff Engine)**: Color-coded bounding boxes for discrepancies, form fields, extracted tables, and vector annotations.
+- **Top Editing Toolbar (`Toolbar`)**:
+  - Cursor modes: Selection, In-situ paragraph editing, Annotations, and Vector drawing.
+  - Vector drawing tools: Freehand ink (`/Ink`), rectangles (`/Square`), circles (`/Circle`), open-arrow lines (`/Line`), and polygons (`/Polygon`).
+  - Smooth zoom controls with fit-to-width and fit-to-page presets.
+- **Multifunctional Sidebar (`Sidebar`)**:
+  - **Pages & Thumbnails**: Visual page carousel, reordering, per-page rotation (-90°, +90°, 180°), and deletion.
+  - **AcroForms Designer**: Interactive form builder (Text, Checkbox, Radio, Dropdown) with surgical in-place flattening.
+  - **Table Extraction**: Vector lattice grid and borderless stream detection with one-click export to JSON, CSV, Markdown, and HTML.
+  - **Redaction & Sanitization**: Surgical text excision, regex scanning (RFC, CURP, SSN, Credit Cards), opaque blackout masks, and metadata purging.
+  - **Digital Signatures & Security**: Certificate inspection, detached PKCS#7 / CMS signing, and RFC 3161 TSA timestamping.
+  - **OCR & PDF/A**: Invisible searchable text layer injection (`3 Tr`) and PDF/A-1b / PDF/A-2b compliance inspection and conversion.
+  - **Metadata Editor**: Bidirectional synchronizer for document `/Info` and XMP XML packages.
+  - **Diff Engine**: Side-by-side document comparison with quantitative discrepancy metrics, word-level highlights, and instant navigation.
+  - **Audit Log**: Real-time viewer for the tamper-evident action history.
 
 ---
 
-## Requisitos Previos
+## Prerequisites
 
 - **Node.js**: `>= 20.9.0`
 - **npm**: `>= 10.0.0`
-- **Backend PDFAPI**: En ejecución (por defecto en `http://localhost:8000`).
+- **Backend PDFAPI**: Running instance (default: `http://localhost:8000`).
 
 ---
 
-## Configuración y Variables de Entorno
+## Configuration & Environment Variables
 
-Crea un archivo `.env.local` basado en `.env.example`:
+Create `.env.local` based on `.env.example`:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Configura las variables según tu entorno:
+Configure variables for your environment:
 
 ```env
-# URL base de la API de backend (FastAPI)
+# Backend API base URL (FastAPI)
 NEXT_PUBLIC_API_URL=http://localhost:8000
 
-# Token Bearer para autenticación de inquilino (desarrollo local)
+# Bearer tenant token for local development
 NEXT_PUBLIC_PDFENGINE_API_KEY=local-dev-secret-key-12345
 ```
 
 ---
 
-## Instalación y Ejecución
+## Installation & Running Locally
 
 ```bash
-# Instalar dependencias
+# 1. Install dependencies
 npm install
 
-# Modo desarrollo con Hot Reloading
+# 2. Start development server with hot reloading
 npm run dev
 
-# Compilar para producción
+# 3. Build optimized production bundle
 npm run build
 
-# Iniciar servidor de producción
+# 4. Start production server
 npm run start
 
-# Ejecutar linter
+# 5. Run ESLint code checks
 npm run lint
 ```
 
-El estudio estará disponible en [http://localhost:3000](http://localhost:3000).
+The Web Studio will be accessible at [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Despliegue
+## Deployment
 
-La aplicación está lista para desplegarse como un proyecto Next.js estándar:
-- **Vercel**: Conectar el repositorio y configurar la variable de entorno `NEXT_PUBLIC_API_URL` apuntando a tu instancia de **PDFAPI**.
+PDFWeb is ready for deployment as a standard Next.js application:
+- **Vercel**: Import the repository and set `NEXT_PUBLIC_API_URL` pointing to your deployed **PDFAPI** endpoint.
 - **Docker**:
   ```dockerfile
   FROM node:20-alpine AS builder
@@ -115,6 +115,6 @@ La aplicación está lista para desplegarse como un proyecto Next.js estándar:
 
 ---
 
-## Licencia
+## License
 
-Distribuido bajo la licencia MIT.
+Distributed under the MIT License.
