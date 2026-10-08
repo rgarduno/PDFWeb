@@ -4,6 +4,18 @@ PDFWeb es la aplicación web interactiva de **PDF Engine**, construida sobre **N
 
 ---
 
+## Ecosistema PDFEngine
+
+PDFWeb es el cliente visual oficial dentro de la arquitectura de repositorios desacoplados de **PDFEngine**:
+
+| Repositorio | Rol | Stack Tecnológico | Estado |
+| :--- | :--- | :--- | :--- |
+| [**PDFEngine**](https://github.com/rgarduno/PDFEngine) | Núcleo algorítmico de alto rendimiento y extensión nativa Python | Rust (ISO 32000-1) + PyO3 | Producción |
+| [**PDFAPI**](https://github.com/rgarduno/PDFAPI) | Backend comercial REST, WebSockets y control multi-tenant | Python 3.13 + FastAPI + Pydantic v2 | Producción |
+| [**PDFWeb**](https://github.com/rgarduno/PDFWeb) *(Este Repo)* | Estudio web interactivo con arquitectura Dual-Canvas | Next.js 16 + React 19 + Tailwind CSS | Producción |
+
+---
+
 ## Características Principales
 
 - **Arquitectura Dual-Canvas Pixel-Perfect**:
